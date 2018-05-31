@@ -6,11 +6,11 @@ Multi Numeral Systems Converter is application written in GTKMM 3 (GTK+3 binding
 
 ### Install GTKMM 3 and pkg-config
 
-This step depends on your operating system. Linux distributions (and other *nix operating systems) should have GTKMM 3 and pkg-config in repository/ports (eg. libgtkmm-3.0-dev and pkg-config packages in Debian based or x11-toolkits/gtkmm3.0 and devel/pkg-config ports in FreeBSD). On macOS you can use package manager like Homebrew. Windows GTKMM binaries can be found on GTKMM page: https://www.gtkmm.org 
+This step depends on your operating system. Linux distributions (and other *nix operating systems) should have GTKMM 3 and pkg-config in repository/ports (eg. libgtkmm-3.0-dev and pkg-config packages in Debian based or x11-toolkits/gtkmm3.0 and devel/pkgconf ports in FreeBSD). On macOS you can use package manager like Homebrew. Windows GTKMM binaries can be found on GTKMM page: https://www.gtkmm.org 
 
 ### Clone this repository and go to the created directory
 ```sh
-git clone https://github.com/BlackDragonDev/MultiNumeralSystemsConverter.git && cd MultiNumeralSystemsConverter
+git clone https://github.com/BlackDragonDv/MultiNumeralSystemsConverter.git && cd MultiNumeralSystemsConverter
 ```
 
 ### Compile using make
