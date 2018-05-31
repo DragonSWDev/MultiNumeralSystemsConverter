@@ -114,15 +114,13 @@ void MainWindow::convertButtonClicked()
     if(outputSystem->get_active_text() == "HEX")
         targetSys = NumeralConverter::NumSystem::HEX;
 
-    NumeralConverter *converter = new NumeralConverter(inputSys, input);
+    NumeralConverter converter(inputSys, input);
     
-    if(!converter->valueGood())
+    if(!converter.valueGood())
     {
         outputEntry->set_text("Input error!");
         return;
     }
 
-    outputEntry->set_text(converter->ConvertValue(targetSys));
-
-    delete converter;
+    outputEntry->set_text(converter.ConvertValue(targetSys));
 }
