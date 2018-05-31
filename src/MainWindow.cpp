@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
     delete windowGrid;
     delete inputEntry;
     delete outputEntry;
+    delete headerAlign;
 }
 
 void MainWindow::buildAppUI()
@@ -55,6 +56,11 @@ void MainWindow::buildAppUI()
     headerBar->set_show_close_button(true);
     headerBar->set_custom_title(*headerBox);
     set_titlebar(*headerBar);
+
+    //Add alignment to header bar to ensure it's height
+    headerAlign = new Gtk::Alignment();
+    headerAlign->set_size_request(2, 40);
+    headerBar->pack_start(*headerAlign);
 
     //Set window content grid
     windowGrid = new Gtk::Grid();

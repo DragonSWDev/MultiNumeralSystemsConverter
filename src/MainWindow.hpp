@@ -17,6 +17,7 @@ class MainWindow : public Gtk::Window
         Gtk::Entry *inputEntry;
         Gtk::Entry *outputEntry;
         Gtk::Button *convertButton;
+        Gtk::Alignment *headerAlign;
 
         void convertButtonClicked();
 
