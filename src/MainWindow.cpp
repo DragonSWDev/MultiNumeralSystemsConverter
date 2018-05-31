@@ -76,8 +76,53 @@ void MainWindow::buildAppUI()
     convertButton = new Gtk::Button("Convert");
     convertButton->set_hexpand(true);
     convertButton->set_vexpand(true);
+    convertButton->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::convertButtonClicked));
     windowGrid->attach(*convertButton, 0, 2, 1, 1);
 
     //Show all widgets
     show_all();
+}
+
+void MainWindow::convertButtonClicked()
+{
+    std::string input = inputEntry->get_text();
+    NumeralConverter::NumSystem inputSys, targetSys;
+
+    //Get input system
+    if(inputSystem->get_active_text() == "BIN")
+        inputSys = NumeralConverter::NumSystem::BIN;
+
+    if(inputSystem->get_active_text() == "OCT")
+        inputSys = NumeralConverter::NumSystem::OCT;
+
+    if(inputSystem->get_active_text() == "DEC")
+        inputSys = NumeralConverter::NumSystem::DEC;
+
+    if(inputSystem->get_active_text() == "HEX")
+        inputSys = NumeralConverter::NumSystem::HEX;
+
+    //Get output system
+    if(outputSystem->get_active_text() == "BIN")
+        targetSys = NumeralConverter::NumSystem::BIN;
+
+    if(outputSystem->get_active_text() == "OCT")
+        targetSys = NumeralConverter::NumSystem::OCT;
+
+    if(outputSystem->get_active_text() == "DEC")
+        targetSys = NumeralConverter::NumSystem::DEC;
+
+    if(outputSystem->get_active_text() == "HEX")
+        targetSys = NumeralConverter::NumSystem::HEX;
+
+    NumeralConverter *converter = new NumeralConverter(inputSys, input);
+    
+    if(!converter->valueGood())
+    {
+        outputEntry->set_text("Input error!");
+        return;
+    }
+
+    outputEntry->set_text(converter->ConvertValue(targetSys));
+
+    delete converter;
 }

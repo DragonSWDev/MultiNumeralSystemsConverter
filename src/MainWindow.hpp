@@ -3,6 +3,8 @@
 
 #include <gtkmm.h>
 
+#include "NumeralConverter.hpp"
+
 class MainWindow : public Gtk::Window
 {
     protected:
@@ -15,6 +17,8 @@ class MainWindow : public Gtk::Window
         Gtk::Entry *inputEntry;
         Gtk::Entry *outputEntry;
         Gtk::Button *convertButton;
+
+        void convertButtonClicked();
 
     private:
         void buildAppUI();
