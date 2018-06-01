@@ -2,6 +2,8 @@
 
 Multi Numeral Systems Converter is application written in GTKMM 3 (GTK+3 binding to C++) which allows user to convert number from binary, octagonal, decimal, hexadecimal system to another system.
 
+<span style="display:block;text-align:center">![Screenshot](/doc/screenshot.png)
+
 ## Building application
 
 ### Install GTKMM 3 and pkg-config
