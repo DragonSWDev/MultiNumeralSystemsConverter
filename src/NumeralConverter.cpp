@@ -54,58 +54,130 @@ std::string NumeralConverter::ConvertValue(NumSystem target)
                 return inputValue;
 
             if(target == NumSystem::DEC)
-                return binToDec();
+                return sysToDec(2);
+
+            if(target == NumSystem::OCT)
+            {
+                inputValue = sysToDec(2); //Convert from BIN to DEC and from DEC to OCT
+                return decToSys(8);
+            }
+
+            if(target == NumSystem::HEX)
+            {
+                inputValue = sysToDec(2); //Convert from BIN to DEC and from DEC to HEX
+                return decToSys(16);
+            }
+
+            break;
+
+        case NumSystem::OCT:
+            if(target == NumSystem::BIN)
+            {
+                inputValue = sysToDec(8); 
+                return decToSys(2);
+            }
+
+            if(target == NumSystem::DEC)
+                return sysToDec(8);
+
+            if(target == NumSystem::OCT)
+                return inputValue;
+
+            if(target == NumSystem::HEX)
+            {
+                inputValue = sysToDec(8); 
+                return decToSys(16);
+            }
 
             break;
 
         case NumSystem::DEC:
             if(target == NumSystem::BIN)
-                return decToBin();
+                return decToSys(2);
+
+            if(target == NumSystem::OCT)
+                return decToSys(8);
 
             if(target == NumSystem::DEC)
+                return inputValue;
+
+            if(target == NumSystem::HEX)
+                return decToSys(16);
+
+        break;
+
+        case NumSystem::HEX:
+            if(target == NumSystem::BIN)
+            {
+                inputValue = sysToDec(16);
+                return decToSys(2);
+            }
+
+            if(target == NumSystem::OCT)
+            {
+                inputValue = sysToDec(16);
+                return decToSys(8);
+            }
+
+
+            if(target == NumSystem::DEC)
+                return sysToDec(16);
+
+            if(target == NumSystem::HEX)
                 return inputValue;
 
         break;
     }
 }
 
-//Conversion funtions start here
+//Decode digit and return int value
+int NumeralConverter::decodeDigit(char digit)
+{   
+    //We have digit greater than 10 (A, B, C etc.)
+    if(digit >= 65)
+        //'A' has value 65 in ASCII, so 65 - 55 is 10, 'B' has value 66 so 66 - 55 is 11 etc.
+        return digit-55;
+    else
+    {
+        std::string val;
+        val += digit;
+        return std::stoi(val);
+    }
+}
 
-//Convert BIN to DEC and vice versa
-std::string NumeralConverter::binToDec()
+//Convert from any system to DEC
+std::string NumeralConverter::sysToDec(int system)
 {
     int val = 0;
     int power = inputValue.length()-1;
 
     for(int i = 0; i < inputValue.length(); i++)
     {
-        if(inputValue[i] == '1')
-            val += pow(2, power);
-
+        val += decodeDigit(inputValue[i]) * pow(system, power);
         power--;
     }
 
     return std::to_string(val);
 }
 
-std::string NumeralConverter::decToBin()
+//Convert from DEC to any system
+std::string NumeralConverter::decToSys(int system)
 {
-    std::string binValTemp, binVal;
+    char digits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+    std::string sysValTemp, sysVal;
     int decVal = std::stoi(inputValue);
 
     while(decVal != 0)
     {
-        if(decVal % 2 == 0)
-            binValTemp += "0";
-        else
-            binValTemp += "1";
-        
-        decVal /= 2;
+        sysValTemp += digits[decVal % system];
+
+        decVal /= system;
     }
 
     //Revert value
-    for (int i = binValTemp.length() - 1; i >= 0; i--)
-        binVal += binValTemp[i];
+    for (int i = sysValTemp.length() - 1; i >= 0; i--)
+        sysVal += sysValTemp[i];
 
-    return binVal;
+    return sysVal;
 }

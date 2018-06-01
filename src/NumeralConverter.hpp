@@ -17,8 +17,10 @@ class NumeralConverter
         std::string inputValue;
         NumSystem valueSystem;
 
-        std::string binToDec();
-        std::string decToBin();
+        int decodeDigit(char digit);
+
+        std::string decToSys(int system);
+        std::string sysToDec(int system);
 };
 
 #endif
