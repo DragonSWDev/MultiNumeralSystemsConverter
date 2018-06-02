@@ -12,29 +12,29 @@ bool NumeralConverter::valueGood()
     switch(valueSystem)
     {
         case NumSystem::BIN:
-            for(int i = 0; i < inputValue.length(); i++)
+            for(unsigned int i = 0; i < inputValue.length(); i++)
                 if(inputValue[i] != '0' && inputValue[i] != '1')
                     return false;
             break;
 
         case NumSystem::OCT:
-            for(int i = 0; i < inputValue.length(); i++)
-                if(inputValue[i] < 48 || inputValue[i] > 55) //ASCII values for 0 to 7
+            for(unsigned int i = 0; i < inputValue.length(); i++)
+                if(inputValue[i] < '0' || inputValue[i] > '7')
                     return false;
 
             break;
 
         case NumSystem::DEC:
-            for(int i = 0; i < inputValue.length(); i++)
-                if(inputValue[i] < 48 || inputValue[i] > 57) //ASCII values for 0 to 9
+            for(unsigned int i = 0; i < inputValue.length(); i++)
+                if(inputValue[i] < '0' || inputValue[i] > '9')
                     return false;
 
             break;
 
         case NumSystem::HEX:
-            for(int i = 0; i < inputValue.length(); i++)
-                if((inputValue[i] < 48 || inputValue[i] > 55) && //ASCII values for 0 to 9 
-                   (inputValue[i] < 65 || inputValue[i] > 70))  //ASCII values for A to F
+            for(unsigned int i = 0; i < inputValue.length(); i++)
+                if((inputValue[i] < '0' || inputValue[i] > '9') &&
+                   (inputValue[i] < 'A' || inputValue[i] > 'F'))
                         return false;
             break;
     }
@@ -125,6 +125,9 @@ std::string NumeralConverter::ConvertValue(NumSystem target)
 
         break;
     }
+
+    //Return 0 to fix warning
+    return 0;
 }
 
 //Decode digit and return int value
@@ -148,7 +151,7 @@ std::string NumeralConverter::sysToDec(int sys)
     int val = 0;
     int power = inputValue.length()-1;
 
-    for(int i = 0; i < inputValue.length(); i++)
+    for(unsigned int i = 0; i < inputValue.length(); i++)
     {
         val += decodeDigit(inputValue[i]) * pow(sys, power);
         power--;
