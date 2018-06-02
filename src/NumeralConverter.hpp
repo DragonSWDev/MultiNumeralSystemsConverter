@@ -19,8 +19,8 @@ class NumeralConverter
 
         int decodeDigit(char digit);
 
-        std::string decToSys(int system);
-        std::string sysToDec(int system);
+        std::string decToSys(int sys);
+        std::string sysToDec(int sys);
 };
 
 #endif

@@ -143,14 +143,14 @@ int NumeralConverter::decodeDigit(char digit)
 }
 
 //Convert from any system to DEC
-std::string NumeralConverter::sysToDec(int system)
+std::string NumeralConverter::sysToDec(int sys)
 {
     int val = 0;
     int power = inputValue.length()-1;
 
     for(int i = 0; i < inputValue.length(); i++)
     {
-        val += decodeDigit(inputValue[i]) * pow(system, power);
+        val += decodeDigit(inputValue[i]) * pow(sys, power);
         power--;
     }
 
@@ -158,7 +158,7 @@ std::string NumeralConverter::sysToDec(int system)
 }
 
 //Convert from DEC to any system
-std::string NumeralConverter::decToSys(int system)
+std::string NumeralConverter::decToSys(int sys)
 {
     char digits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -167,9 +167,9 @@ std::string NumeralConverter::decToSys(int system)
 
     while(decVal != 0)
     {
-        sysValTemp += digits[decVal % system];
+        sysValTemp += digits[decVal % sys];
 
-        decVal /= system;
+        decVal /= sys;
     }
 
     //Revert value
