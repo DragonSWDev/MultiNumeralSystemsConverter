@@ -19,26 +19,23 @@ bool NumeralConverter::valueGood()
 
         case NumSystem::OCT:
             for(int i = 0; i < inputValue.length(); i++)
-                if(inputValue[i] != '0' && inputValue[i] != '1' && inputValue[i] != '2' && inputValue[i] != '3'
-                && inputValue[i] != '4' && inputValue[i] != '5' && inputValue[i] != '6' && inputValue[i] != '7')
+                if(inputValue[i] < 48 || inputValue[i] > 55) //ASCII values for 0 to 7
                     return false;
+
             break;
 
         case NumSystem::DEC:
             for(int i = 0; i < inputValue.length(); i++)
-                if(inputValue[i] != '0' && inputValue[i] != '1' && inputValue[i] != '2' && inputValue[i] != '3'
-                && inputValue[i] != '4' && inputValue[i] != '5' && inputValue[i] != '6' && inputValue[i] != '7'
-                && inputValue[i] != '8' && inputValue[i] != '9')
+                if(inputValue[i] < 48 || inputValue[i] > 57) //ASCII values for 0 to 9
                     return false;
+
             break;
 
         case NumSystem::HEX:
             for(int i = 0; i < inputValue.length(); i++)
-                if(inputValue[i] != '0' && inputValue[i] != '1' && inputValue[i] != '2' && inputValue[i] != '3'
-                && inputValue[i] != '4' && inputValue[i] != '5' && inputValue[i] != '6' && inputValue[i] != '7'
-                && inputValue[i] != '8' && inputValue[i] != '9' && inputValue[i] != 'A' && inputValue[i] != 'B' 
-                && inputValue[i] != 'C' && inputValue[i] != 'D' && inputValue[i] != 'E' && inputValue[i] != 'F')
-                    return false;
+                if((inputValue[i] < 48 || inputValue[i] > 55) && //ASCII values for 0 to 9 
+                   (inputValue[i] < 65 || inputValue[i] > 70))  //ASCII values for A to F
+                        return false;
             break;
     }
 
